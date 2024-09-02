@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+  border-radius: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+p{
+  background-color: white;
+  width: 70%;
+  padding-left: 10px;
+}
+button {
+  position: relative;
+  left: 10px;
+  background-color: red; 
+  border: 0; 
+  height: 28px;
+  color: white;
+    display: inline-block;
+    align-self: baseline;
+
+}
+div input{
+width: 70%;
+border: 0; 
+  height: 28px;
+  padding-left: 20px;
+}
+div {
+
+  
+  width: 90%;
+  
+   padding: 5px ;
+   padding-left: 20px;
+
+    background-color:rgb(232, 233, 231);
+    padding: 10px;
+    margin: 10px;
+}
+.tasks{
+
+min-height: 50px;
+}
+button:hover {
+  background-color: blueviolet;
+}
+.newTask {
+  background-color: rgb(219, 252, 252);
+}
+    </style>
+
+    <div>
+        <input id="task" type="text" value="murtada">
+        <button id="addTask"> Add task </button>
+       </div>
+       <div id="tasks"> </div>
+
+    <script>
+        let intask = document.getElementById("task");
+let addTask = document.getElementById("addTask");
+let AllTasks = document.getElementById("tasks");
+let delbtn = document.getElementsByClassName("del");
+let tasksArry = [];
+addTask.onclick = function () {
+  if (intask.value !== "") {
+    add2Ar(intask.value);
+    intask.value = "";
+  } else {
+    alert("اكتب شي يمعوووودددددددددددددددددد");
+  }
+};
+
+function add2Ar(e) {
+  const task = {
+    id: Date.now(),
+    text: e,
+    completed: false,
+  };
+  tasksArry.push(task);
+  add2page(tasksArry);
+  // console.log(tasksArry)
+}
+
+function add2page(tasksArry) {
+  AllTasks.innerHTML = "";
+
+  tasksArry.forEach((task) => {
+    let newTaskDiv = document.createElement("div");
+    newTaskDiv.className = "newTask";
+    newTaskDiv.setAttribute("data-id", task.id);
+
+
+    newTaskDiv.appendChild(document.createTextNode(task.text));
+    let btn = document.createElement("button");
+    btn.className = "del";
+    btn.appendChild(document.createTextNode("delete"));
+    newTaskDiv.appendChild(btn);
+    AllTasks.appendChild(newTaskDiv);
+  });
+}
+
+    </script>
+</body>
+</html>

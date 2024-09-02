@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ساعة إلكترونية</title>
+</head>
+<body>
+    <div>
+        <div id="clock">
+            <span id="minutes">00</span>:<span id="seconds">00</span>
+        </div>
+        <div id="extra-time" style="display: none;">
+            وقت إضافي: <span id="extra-minutes">00</span>:<span id="extra-seconds">00</span>
+        </div>
+        <button id="start">ابدأ</button>
+        <button id="end-first-half">نهاية الشوط الأول</button>
+        <button id="end-second-half">نهاية الشوط الثاني</button>
+        <button id="stop">إيقاف</button>
+        <button id="reset">إعادة تعيين</button>
+    </div>
+    <script>
+        let timer;
+        let extraTimer;
+        let minutes = 0;
+        let seconds = 0;
+        let extraMinutes = 0;
+        let extraSeconds = 0;
+        let running = false;
+        let isFirstHalf = true;
+        let isExtraTime = false;
+
+        const displayMinutes = document.getElementById('minutes');
+        const displaySeconds = document.getElementById('seconds');
+        const displayExtraMinutes = document.getElementById('extra-minutes');
+        const displayExtraSeconds = document.getElementById('extra-seconds');
+        const extraTimeDiv = document.getElementById('extra-time');
+        const startButton = document.getElementById('start');
+        const endFirstHalfButton = document.getElementById('end-first-half');
+        const endSecondHalfButton = document.getElementById('end-second-half');
+        const stopButton = document.getElementById('stop');
+        const resetButton = document.getElementById('reset');
+
+        function updateDisplay() {
+            displayMinutes.textContent = minutes.toString().padStart(2, '0');
+            displaySeconds.textContent = seconds.toString().padStart(2, '0');
+            displayExtraMinutes.textContent = extraMinutes.toString().padStart(2, '0');
+            displayExtraSeconds.textContent = extraSeconds.toString().padStart(2, '0');
+        }
+
+        function startTimer() {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    if (seconds === 0) {
+                        seconds = 0;
+                        minutes+=5;
+                    } else {
+                        seconds++;
+                    }
+
+                    // Check if the time reached 45 or 90 minutes
+                    if (isFirstHalf && minutes === 45) {
+                        stopTimer();
+                        extraTimeDiv.style.display = 'block';
+                        isExtraTime = true;
+                        startExtraTime();
+                    } else if (!isFirstHalf && minutes === 90) {
+                        stopTimer();
+                        extraTimeDiv.style.display = 'block';
+                        isExtraTime = true;
+                        startExtraTime();
+                    }
+
+                    updateDisplay();
+                }, 1000);
+            }
+        }
+
+        function startExtraTime() {
+            if (isExtraTime) {
+                extraTimer = setInterval(() => {
+                    if (extraSeconds === 59) {
+                        extraSeconds = 0;
+                        extraMinutes++;
+                    } else {
+                        extraSeconds++;
+                    }
+
+                    updateDisplay();
+                }, 1000);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            clearInterval(extraTimer);  // Stop extra time if running
+            running = false;
+        }
+
+        function endFirstHalf() {
+            stopTimer();
+            isExtraTime = false;
+            // Reset extra time display and stop it
+            extraTimeDiv.style.display = 'none';
+            clearInterval(extraTimer);
+            extraMinutes = 0;
+            extraSeconds = 0;
+            updateDisplay();
+        }
+
+        function endSecondHalf() {
+            stopTimer();
+            isExtraTime = false;
+            // Reset extra time display and stop it
+            extraTimeDiv.style.display = 'none';
+            clearInterval(extraTimer);
+            extraMinutes = 0;
+            extraSeconds = 0;
+            updateDisplay();
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            clearInterval(extraTimer);
+            running = false;
+            minutes = 0;
+            seconds = 0;
+            extraMinutes = 0;
+            extraSeconds = 0;
+            extraTimeDiv.style.display = 'none';
+            isFirstHalf = true;
+            isExtraTime = false;
+            updateDisplay();
+        }
+
+        startButton.addEventListener('click', startTimer);
+        endFirstHalfButton.addEventListener('click', endFirstHalf);
+        endSecondHalfButton.addEventListener('click', endSecondHalf);
+        stopButton.addEventListener('click', stopTimer);
+        resetButton.addEventListener('click', resetTimer);
+
+        updateDisplay();
+    </script>
+</body>
+</html>

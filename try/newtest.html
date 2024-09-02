@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Match Details</title>
+    <link rel="stylesheet" href="newtest.css" />
+
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>ببسم الله خير الاسماء</h1>
+      <button class="bt" id="showLega">جدول الدوري</button>
+      <p id="current-date"></p>
+      <div>
+        <h2>توقيت المباراة</h2>
+        <button class="bt" onclick="startTimer()">ابدأ العداد</button>
+        <span id="timer">00:00</span>
+      </div>
+      <div>
+        <h2>أدخل نتيجة مباراة</h2>
+        <select class="teams" id="team1"></select>
+        <input type="number" id="score1" placeholder="أهداف الفريق 1" />
+        <span> X </span>
+        <input type="number" id="score2" placeholder="أهداف الفريق 2" />
+
+        <select class="teams" id="team2"></select>
+
+        <button class="bt" onclick="saveAndAbdate()">حفظ النتيجة</button>
+      </div>
+      <div class="team-section">
+        <h2>لاعبي الفريق الاول</h2>
+        <!-- التشكيلة الاساسية  -->
+        <table class="player-table">
+          <thead>
+            <tr>
+              <th>ت</th>
+              <th>التشكيلة الاساسية</th>
+              <th>التبديل</th>
+              <th>انذارات صفراء</th>
+              <th>بطاقة حمراء</th>
+              <th>الاهداف</th>
+            </tr>
+          </thead>
+          <tbody class="team1players"></tbody>
+          <!-- الاحتياط -->
+          <thead>
+            <tr>
+              <th>ت</th>
+              <th>الاحتياط</th>
+              <th>التبديل</th>
+              <th>انذارات صفراء</th>
+              <th>بطاقة حمراء</th>
+              <th>الاهداف</th>
+            </tr>
+          </thead>
+          <tbody class="team1players2"></tbody>
+        </table>
+      </div>
+      <div class="team-section">
+        <!-- secound team  -->
+        <h2>لاعبي الفريق الثاني</h2>
+        <table class="player-table">
+          <thead>
+            <tr>
+              <th>ت</th>
+              <th>التشكيلة الاساسية</th>
+              <th>التبديل</th>
+              <th>انذارات صفراء</th>
+              <th>بطاقة حمراء</th>
+              <th>الاهداف</th>
+            </tr>
+          </thead>
+          <tbody class="team1players"></tbody>
+          <!-- الاحتياط -->
+          <thead>
+            <tr>
+              <th>ت</th>
+              <th>الاحتياط</th>
+              <th>التبديل</th>
+              <th>انذارات صفراء</th>
+              <th>بطاقة حمراء</th>
+              <th>الاهداف</th>
+            </tr>
+          </thead>
+          <tbody class="team1players2"></tbody>
+        </table>
+      </div>
+      <div>
+        <h2>حكام المباراة</h2>
+        <label for="referee1"> الحكم الاول </label
+        ><input
+          type="text"
+          id="referee1"
+          placeholder="اسم الحكم "
+          value="حسين حيدر"
+        />
+
+        <label for="referee2"> الحكم المساعد </label
+        ><input type="text" id="referee2" placeholder="اسم الحكم " />
+
+        <label for="referee3"> الحكم المساعد </label
+        ><input type="text" id="referee3" placeholder="اسم الحكم " />
+
+        <label for="referee4"> الحكم الرابع </label
+        ><input type="text" id="referee4" placeholder="اسم الحكم " />
+      </div>
+
+      <div class="dontsave">
+        <button class="bt" onclick="displayMatchSummaries()">عرض الارشيف</button>
+        <h2>ارشيف المباريات</h2>
+      </div>
+
+      <div id="match-summary-list" class="summary-list"></div>
+    </div>
+    <!-- جدول ترتيب الفرق  -->
+    <div id="over"></div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>دوري السدة</p>
+        <table class="table2" id="footballTable">
+          <thead>
+            <tr>
+              <th>الفريق</th>
+              <th>المباريات التي لعبها</th>
+              <th>المباريات التي فاز بها</th>
+              <th>المباريات التي تعادل بها</th>
+              <th>المباريات التي خسر بها</th>
+              <th>فارق الأهداف</th>
+              <th>الأهداف له</th>
+              <th>الأهداف عليه</th>
+              <th>النقاط</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="table.js"></script>
+    <script src="try.js"></script>
+  </body>
+</html>

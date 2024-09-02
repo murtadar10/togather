@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Interface to Image or PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div id="capture" style="padding: 20px; background: #f5f5f5; width: 300px; border: 1px solid #ccc;">
+        <!-- ضع هنا الواجهة التي ترغب في تحويلها -->
+        <h1>My Web Application</h1>
+        <p>This is a sample interface that will be captured as an image or PDF.</p>
+    </div>
+
+    <button id="downloadImage">Download as Image</button>
+    <button id="downloadPDF">Download as PDF</button>
+
+    <script>
+        document.getElementById("downloadImage").addEventListener("click", function() {
+            html2canvas(document.getElementById("capture")).then(function(canvas) {
+                var link = document.createElement('a');
+                link.download = 'interface.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        });
+
+        document.getElementById("downloadPDF").addEventListener("click", function() {
+            html2canvas(document.getElementById("capture")).then(function(canvas) {
+                var imgData = canvas.toDataURL('image/png');
+                var pdf = new jspdf.jsPDF();
+                pdf.addImage(imgData, 'PNG', 0, 0);
+                pdf.save("interface.pdf");
+            });
+        });
+    </script>
+</body>
+</html>
